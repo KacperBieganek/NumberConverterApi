@@ -10,7 +10,7 @@ import java.util.Set;
 public class InputValidator {
 
     public static final String MISSING_PARAMETERS_MESSAGE = "Missing type/number parameter(s)";
-    public static final String INVALID_NUMBER_ERROR_MESSAGE = "Number parameter is invalid, must be decimal digit";
+    public static final String INVALID_NUMBER_ERROR_MESSAGE = "Number parameter is invalid, must be decimal digit or positive decimal digit for Roman conversion";
     public static final String INVALID_CONVERSION_TYPE_ERROR_MESSAGE = "Type parameter is invalid expected HEX or ROMAN but was %s";
 
     public ValidateResult validateInput(Map<String, String[]> requestParams) {
@@ -19,7 +19,7 @@ public class InputValidator {
             prepareValidationResult(result, MISSING_PARAMETERS_MESSAGE);
             return result;
         }
-        if (!isNumberValid(requestParams.get("number")[0])) {
+        if (!isNumberValid(requestParams)) {
             prepareValidationResult(result, INVALID_NUMBER_ERROR_MESSAGE);
             return result;
         }
@@ -41,8 +41,17 @@ public class InputValidator {
         return NumberConverterFactory.getConversionStrategy(type).isPresent();
     }
 
-    private boolean isNumberValid(String number) {
-        return NumberUtils.isParsable(number) && NumberUtils.isDigits(number);
+    private boolean isNumberValid(Map<String, String[]> requestParams) {
+        String number = requestParams.get("number")[0];
+        return NumberUtils.isParsable(number) && (isValidHexConversion(requestParams) || isValidForRomanConversion(number, requestParams.get("type")[0]));
+    }
+
+    private boolean isValidForRomanConversion(String number, String type) {
+        return NumberUtils.isDigits(number) && type.equals("ROMAN");
+    }
+
+    private boolean isValidHexConversion(Map<String, String[]> requestParams) {
+        return requestParams.get("type")[0].equals("HEX");
     }
 
     private boolean areParametersPresent(Set<String> queryParams) {
