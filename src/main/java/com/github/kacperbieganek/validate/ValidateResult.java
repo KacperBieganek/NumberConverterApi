@@ -13,8 +13,8 @@ public class ValidateResult {
         return isValid;
     }
 
-    public void setPartialyValid(boolean partialValidation) {
-        isValid &= partialValidation;
+    public void setValid(boolean valid) {
+        isValid = valid;
     }
 
     public String getErrorMessage() {

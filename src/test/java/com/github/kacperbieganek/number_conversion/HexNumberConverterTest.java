@@ -17,7 +17,7 @@ public class HexNumberConverterTest {
     @Test
     public void shouldConvertPositiveNumber() {
         //given
-        int numberToConvert = 1;
+        long numberToConvert = 1;
         //when
         String result = converter.convertNumber(numberToConvert);
         //then
@@ -27,7 +27,7 @@ public class HexNumberConverterTest {
     @Test
     public void shouldConvertZero() {
         //given
-        int numberToConvert = 0;
+        long numberToConvert = 0;
         //when
         String result = converter.convertNumber(numberToConvert);
         //then
@@ -37,10 +37,30 @@ public class HexNumberConverterTest {
     @Test
     public void shouldConvertNegativeNumber() {
         //given
-        int numberToConvert = -1;
+        long numberToConvert = -1;
         //when
         String result = converter.convertNumber(numberToConvert);
         //then
         assertThat(result).isEqualToIgnoringCase("FFFFFFFFFFFFFFFF");
+    }
+
+    @Test
+    public void shouldConvertLongMaxValue() {
+        //given
+        long numberToConvert = Long.MAX_VALUE;
+        //when
+        String result = converter.convertNumber(numberToConvert);
+        //then
+        assertThat(result).isEqualToIgnoringCase("7FFFFFFFFFFFFFFF");
+    }
+
+    @Test
+    public void shouldConvertLongMinValue() {
+        //given
+        long numberToConvert = Long.MIN_VALUE;
+        //when
+        String result = converter.convertNumber(numberToConvert);
+        //then
+        assertThat(result).isEqualToIgnoringCase("8000000000000000");
     }
 }

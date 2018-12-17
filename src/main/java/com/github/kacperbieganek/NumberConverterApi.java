@@ -3,6 +3,9 @@ package com.github.kacperbieganek;
 import com.github.kacperbieganek.number_conversion.NumberConverterFactory;
 import com.github.kacperbieganek.validate.InputValidator;
 import com.github.kacperbieganek.validate.ValidateResult;
+import spark.QueryParamsMap;
+
+import java.util.Map;
 
 import static spark.Spark.*;
 
@@ -13,7 +16,7 @@ class NumberConverterApi {
     public static void main(String[] args) {
         before("/converter", (req, res) ->
         {
-            final ValidateResult result = validator.validateInput(req.queryParams());
+            final ValidateResult result = validator.validateInput(req.queryMap().toMap());
             if (!result.isValid()) {
                 halt(401, result.getErrorMessage());
             }

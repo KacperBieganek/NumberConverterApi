@@ -16,53 +16,52 @@ public class RomanNumberConverterTest {
     }
 
     @Test
-    public void shouldConvertOneToRoman() {
+    public void shouldConvertFortyOneToRoman() {
         //given
-        long number = 1;
+        long number = 41;
         //when
         String result = converter.convertNumber(number);
         //then
-        assertThat(result).isEqualTo("I");
+        assertThat(result).isEqualTo("XLI");
     }
 
     @Test
-    public void shouldConvertFourToRoman() {
+    public void shouldConvertFiftyFourToRoman() {
         //given
-        long number = 4;
+        long number = 54;
         //when
         String result = converter.convertNumber(number);
         //then
-        assertThat(result).isEqualTo("IV");
+        assertThat(result).isEqualTo("LIV");
     }
 
     @Test
-    public void shouldConvertNineToRoman() {
+    public void shouldConvertNinetyNineToRoman() {
         //given
-        long number = 9;
+        long number = 99;
         //when
         String result = converter.convertNumber(number);
         //then
-        assertThat(result).isEqualTo("IX");
+        assertThat(result).isEqualTo("XCIX");
     }
 
     @Test
-    public void shouldConvertTenToRoman() {
+    public void shouldConvertHundredAndTenToRoman() {
         //given
-        long number = 10;
+        long number = 110;
         //when
         String result = converter.convertNumber(number);
         //then
-        assertThat(result).isEqualTo("X");
+        assertThat(result).isEqualTo("CX");
     }
 
     @Test
-    public void shouldConvertFortyToRoman() {
+    public void shouldParseMillionOneHundredElevenThousandOneHundredElevenToRoman() {
         //given
-        long number = 40;
+        long number = 1111111;
         //when
         String result = converter.convertNumber(number);
         //then
-        assertThat(result).isEqualTo("XL");
+        assertThat(result).isEqualTo("(M)(C)(X)MCXI");
     }
-
 }
