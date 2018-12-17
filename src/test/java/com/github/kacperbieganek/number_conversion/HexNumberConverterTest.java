@@ -19,7 +19,7 @@ public class HexNumberConverterTest {
         //given
         int numberToConvert = 1;
         //when
-        String result = converter.convert(numberToConvert);
+        String result = converter.convertNumber(numberToConvert);
         //then
         assertThat(result).isEqualTo("1");
     }
@@ -29,7 +29,7 @@ public class HexNumberConverterTest {
         //given
         int numberToConvert = 0;
         //when
-        String result = converter.convert(numberToConvert);
+        String result = converter.convertNumber(numberToConvert);
         //then
         assertThat(result).isEqualTo("0");
     }
@@ -39,8 +39,8 @@ public class HexNumberConverterTest {
         //given
         int numberToConvert = -1;
         //when
-        String result = converter.convert(numberToConvert);
+        String result = converter.convertNumber(numberToConvert);
         //then
-        assertThat(result).isEqualToIgnoringCase("FFFFFFFF");
+        assertThat(result).isEqualToIgnoringCase("FFFFFFFFFFFFFFFF");
     }
 }

@@ -13,6 +13,5 @@ public class NumberConverterApiTest {
 
     @Test
     public void shouldPass() {
-
     }
 }
