@@ -27,7 +27,7 @@ public class InputValidatorTest {
         ValidateResult result = validator.validateInput(Collections.emptyMap());
         //then
         assertThat(result.isValid()).isFalse().as("Shouldn't be valid when parameters are missing");
-        assertThat(result.getErrorMessage()).isEqualToIgnoringCase("Missing type/number parameter(s)");
+        assertThat(result.getErrorMessage()).isEqualToIgnoringCase(InputValidator.MISSING_PARAMETERS_MESSAGE);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class InputValidatorTest {
         ValidateResult result = validator.validateInput(paramsMap);
         //then
         assertThat(result.isValid()).isFalse().as("Shouldn't be valid when number input is invalid");
-        assertThat(result.getErrorMessage()).isEqualToIgnoringCase("Number parameter is invalid");
+        assertThat(result.getErrorMessage()).isEqualToIgnoringCase(InputValidator.INVALID_NUMBER_ERROR_MESSAGE);
     }
 
     @Test
@@ -53,6 +53,6 @@ public class InputValidatorTest {
         ValidateResult result = validator.validateInput(paramsMap);
         //then
         assertThat(result.isValid()).isFalse().as("Shouldn't be valid when conversion type is invalid");
-        assertThat(result.getErrorMessage()).isEqualToIgnoringCase("Type parameter is invalid expected HEX or ROMAN but was foo");
+        assertThat(result.getErrorMessage()).isEqualToIgnoringCase(String.format(InputValidator.INVALID_CONVERSION_TYPE_ERROR_MESSAGE, paramsMap.get("type")[0]));
     }
 }

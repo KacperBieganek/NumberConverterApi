@@ -3,9 +3,6 @@ package com.github.kacperbieganek;
 import com.github.kacperbieganek.number_conversion.NumberConverterFactory;
 import com.github.kacperbieganek.validate.InputValidator;
 import com.github.kacperbieganek.validate.ValidateResult;
-import spark.QueryParamsMap;
-
-import java.util.Map;
 
 import static spark.Spark.*;
 
@@ -25,6 +22,6 @@ class NumberConverterApi {
         get("/converter", "application/json", (req, res) -> NumberConverterFactory.
                 getConversionStrategy(req.queryParams("type"))
                 .get()
-                .convertNumber(Integer.parseInt(req.queryParams("number"))));
+                .convertNumber(Long.parseLong(req.queryParams("number"))));
     }
 }

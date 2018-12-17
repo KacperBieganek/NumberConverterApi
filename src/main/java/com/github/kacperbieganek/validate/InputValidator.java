@@ -8,19 +8,24 @@ import java.util.Map;
 import java.util.Set;
 
 public class InputValidator {
+
+    public static final String MISSING_PARAMETERS_MESSAGE = "Missing type/number parameter(s)";
+    public static final String INVALID_NUMBER_ERROR_MESSAGE = "Number parameter is invalid, must be decimal digit";
+    public static final String INVALID_CONVERSION_TYPE_ERROR_MESSAGE = "Type parameter is invalid expected HEX or ROMAN but was %s";
+
     public ValidateResult validateInput(Map<String, String[]> requestParams) {
         ValidateResult result = new ValidateResult();
         if (!areParametersPresent(requestParams.keySet())) {
-            prepareValidationResult(result, "Missing type/number parameter(s)");
+            prepareValidationResult(result, MISSING_PARAMETERS_MESSAGE);
             return result;
         }
         if (!isNumberValid(requestParams.get("number")[0])) {
-            prepareValidationResult(result, "Number parameter is invalid");
+            prepareValidationResult(result, INVALID_NUMBER_ERROR_MESSAGE);
             return result;
         }
         if (!isConversionTypeValid(requestParams.get("type")[0])) {
             result.setValid(false);
-            result.setErrorMessage("Type parameter is invalid expected HEX or ROMAN but was " + requestParams.get("type")[0]);
+            result.setErrorMessage(String.format(INVALID_CONVERSION_TYPE_ERROR_MESSAGE, requestParams.get("type")[0]));
             return result;
         }
 
