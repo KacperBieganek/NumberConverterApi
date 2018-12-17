@@ -26,12 +26,43 @@ public class RomanNumberConverterTest {
     }
 
     @Test
-    public void shouldConvertTwoToRoman() {
+    public void shouldConvertFourToRoman() {
         //given
-        long number = 2;
+        long number = 4;
         //when
         String result = converter.convertNumber(number);
         //then
-        assertThat(result).isEqualTo("II");
+        assertThat(result).isEqualTo("IV");
     }
+
+    @Test
+    public void shouldConvertNineToRoman() {
+        //given
+        long number = 9;
+        //when
+        String result = converter.convertNumber(number);
+        //then
+        assertThat(result).isEqualTo("IX");
+    }
+
+    @Test
+    public void shouldConvertTenToRoman() {
+        //given
+        long number = 10;
+        //when
+        String result = converter.convertNumber(number);
+        //then
+        assertThat(result).isEqualTo("X");
+    }
+
+    @Test
+    public void shouldConvertFortyToRoman() {
+        //given
+        long number = 40;
+        //when
+        String result = converter.convertNumber(number);
+        //then
+        assertThat(result).isEqualTo("XL");
+    }
+
 }
